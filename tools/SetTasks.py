@@ -17,4 +17,4 @@ for i in range(0,PeopleNum-1):
     for r in range(0,Single):
         shutil.move(DataDir+"\\"+os.listdir(DataDir)[0],"output\\"+str(i)+"\\"+os.listdir(DataDir)[0])
 for r in range(0,Last):
-    shutil.move(DataDir+"\\"+os.listdir(DataDir)[0],"output\\"+str(PeopleNum)+"\\"+os.listdir(DataDir)[0])
+    shutil.move(DataDir+"\\"+os.listdir(DataDir)[0],"output\\"+str(PeopleNum-1)+"\\"+os.listdir(DataDir)[0])

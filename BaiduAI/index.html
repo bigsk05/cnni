@@ -1,0 +1,23 @@
+<script>
+	function online(){
+	};
+	function upload(){
+	};
+</script>
+<noscript>
+	<h1>Your browser do not support javascript</h1>
+</noscript>
+<form action="entrance.php" method="get">
+  <label for="plant">Plant</label>
+  <input type="radio" name="choice" value="plant" />
+  <label for="animal">Animal</label>
+  <input type="radio" name="choice" value="animal" />
+  <br/>
+  <label for="plant">Online</label>
+  <input type="radio" name="type" value="online" />
+  <label for="animal">Upload</label>
+  <input type="radio" name="type" value="upload" />
+  <br/>
+  <p>Image address: <input type="text" name="image_address" /></p>
+  <input type="submit" value="Submit" />
+</form>

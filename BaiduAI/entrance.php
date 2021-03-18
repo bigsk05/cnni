@@ -4,12 +4,12 @@ Entrance of application programming interface
 Author: Bigsk(https://xiaxinzhe.cn)[xiaxinzhe@xiaxinzhe.cn]
 */
 //--------------------------//
+require_once 'AipImageClassify.php';
 $APP_ID='';
 $API_KEY='';
 $SECRET_KEY='';
 //--------------------------//
-require_once 'AipImageClassify.php';
-switch $_GET['type']{
+switch $_POST['type']{
 	$output='';
 	case "upload":
 		$image=file_get_contents($_FILES['image']['tmp_name']);
@@ -19,9 +19,9 @@ switch $_GET['type']{
 				echo file_get_contents("data/".$hash.".html");
 			}else{
 				$client = new AipImageClassify($APP_ID, $API_KEY, $SECRET_KEY);
-				if($_GET['choice']=="plant"){
+				if($_POST['choice']=="plant"){
 					$result = $client->plantDetect($image);
-				}elseif($_GET['choice']=="animal"){
+				}elseif($_POST['choice']=="animal"){
 					$result = $client->animalDetect($image);
 				}
                 $before_score=0.0;
@@ -48,16 +48,16 @@ switch $_GET['type']{
 			echo '<h1>Fail to get the image.</h1>';
 		}
 	case "online":
-		$image = file_get_contents($_GET['image_address']);
+		$image = file_get_contents($_POST['image']);
 		if(!empty($image)){
 			$hash=md5($image);
 			if(!file_exists("data/".$hash.".html")){
 				echo file_get_contents("data/".$hash.".html");
 			}else{
 				$client = new AipImageClassify($APP_ID, $API_KEY, $SECRET_KEY);
-				if($_GET['choice']=="plant"){
+				if($_POST['choice']=="plant"){
 					$result = $client->plantDetect($image);
-				}elseif($_GET['choice']=="animal"){
+				}elseif($_POST['choice']=="animal"){
 					$result = $client->animalDetect($image);
 				}
                 $before_score=0.0;

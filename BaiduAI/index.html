@@ -1,23 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
 <script>
 	function online(){
+		document.getElementById("control").innerHTML = 'Image address: <input type="text" name="image" />';
 	};
 	function upload(){
+		document.getElementById("control").innerHTML = 'Upload image: <input type="file" name="image" />';
 	};
 </script>
 <noscript>
-	<h1>Your browser do not support javascript</h1>
+	<h1>Your browser do not support javascript</h1><!--
 </noscript>
-<form action="entrance.php" method="get">
-  <label for="plant">Plant</label>
-  <input type="radio" name="choice" value="plant" />
-  <label for="animal">Animal</label>
-  <input type="radio" name="choice" value="animal" />
-  <br/>
+<form action="entrance.php" method="post">
   <label for="plant">Online</label>
-  <input type="radio" name="type" value="online" />
+  <input type="radio" name="type" value="online" onClick="online()" checked/>
   <label for="animal">Upload</label>
-  <input type="radio" name="type" value="upload" />
+  <input type="radio" name="type" value="upload" onClick="upload()"/>
   <br/>
-  <p>Image address: <input type="text" name="image_address" /></p>
+  <label for="plant">Plant</label>
+  <input type="radio" name="choice" value="plant" checked/>
+  <label for="animal">Animal</label>
+  <input type="radio" name="choice" value="animal"/>
+  <br/>
+  <p id="control">Image address: <input type="text" name="image"/></p>
   <input type="submit" value="Submit" />
 </form>
+<noscript>--></noscript>
+</body>
+</html>

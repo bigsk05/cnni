@@ -1,11 +1,7 @@
-import requests
-import re
-import os
-import urllib.parse
-import json
-
-root="data"
-
+import requests,re,os,urllib,json,sys
+root=sys.argv[1]
+depth=sys.argv[2]
+jsonAddr=sys.argv[3]
 class get_img_baidu(object):
     def get_page_html(self, page_url):
         headers = {
@@ -61,40 +57,20 @@ class get_img_baidu(object):
                 content = self.get_image_content(real_url)
                 self.save_pic(real_url, content, root)
 
-class reptiles_baidu_img(object):
-    '''main class'''
-    '''echo depth has 30 pictures'''
-    def animal(self,depth):
-        ''':depth depth of reptiles'''
-        global root
+def main():
+    global root
+    global depth
+    global jsonAddr
+    if(os.path.isdir(root)):
         if(os.path.isdir(root)):
-            if(os.path.isdir(root+"\\animal")):
-                pass
-            else:
-                os.mkdir(root+"\\animal")
+            pass
         else:
             os.mkdir(root)
-            os.mkdir(root+"\\animal")
-        with open("animal.json",encoding="utf8") as fo:
-            jsons=json.loads(fo.read())
-        for i in range(0,len(jsons)):
-            get_img_baidu().get(jsons[i],depth,root+'\\animal\\'+jsons[i]+'\\')
-    def plant(self,depth):
-        ''':depth depth of reptiles'''
-        global root
-        if(os.path.isdir(root)):
-            if(os.path.isdir(root+"\\plant")):
-                pass
-            else:
-                os.mkdir(root+"\\plant")
-        else:
-            os.mkdir(root)
-            os.mkdir(root+"\\plant")
-        with open("plant.json",encoding="utf8") as fo:
-            jsons=json.loads(fo.read())
-        for i in range(0,len(jsons)):
-            get_img_baidu().get(jsons[i],depth,root+'\\plant\\'+jsons[i]+'\\')
-
-def main(depth):
-    reptiles_baidu_img().animal(depth)
-    reptiles_baidu_img().plant(depth)
+    else:
+        os.mkdir(root)
+        os.mkdir(root)
+    with open(jsonAddr,encoding="utf8") as fo:
+        jsons=json.loads(fo.read())
+    for i in range(0,len(jsons)):
+        get_img_baidu().get(jsons[i],depth,root+'\\'+jsons[i]+'\\')
+main()

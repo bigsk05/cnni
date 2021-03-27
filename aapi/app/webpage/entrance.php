@@ -2,10 +2,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>普思创识 - 凤鸣高级中学</title>
-    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css"/>
+  <title>你走错地方了</title>
+    <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
     <link rel="icon" href="https://i.loli.net/2020/09/26/1qFYLIAkUzrPEgt.png" type="image/png">
     <link rel="shortcut icon" href='https://i.loli.net/2020/09/26/1qFYLIAkUzrPEgt.png' type="image/png">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <script>
       function online(){
         document.getElementById("control").innerHTML = '<h5>选择图片存在的地方：</h5><input type="radio" name="type" value="online" onClick="online()" checked/><strong>在线图片</strong><input type="radio" name="type" value="upload" onClick="upload()"/><strong>上传图片</strong><input type="text" name="image"/><br/>';
@@ -23,7 +24,7 @@
 			<h4><a href="index.html">返回</a></h4>
 <?php
 //--------------------------//
-require_once 'libraries/AipImageClassify.php';
+require_once '../libraries/AipImageClassify.php';
 $APP_ID='';
 $API_KEY='';
 $SECRET_KEY='';
@@ -34,8 +35,8 @@ switch ($_POST['type']){
 		$image=file_get_contents($_FILES['image']['tmp_name']);
 		if(!empty($image)){
 			$hash=md5($image);
-			if(file_exists("data/".$hash.".html")){
-				echo file_get_contents("data/".$hash.".html");
+			if(file_exists("../data/".$hash.".html")){
+				echo file_get_contents("../data/".$hash.".html");
 			}else{
 				$client = new AipImageClassify($APP_ID, $API_KEY, $SECRET_KEY);
 				if($_POST['choice']=="plant"){
@@ -59,7 +60,7 @@ switch ($_POST['type']){
 				}
 				echo '<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
 				$output=$output.'<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
-				$fp = @fopen("data/".$hash.".html", "w+");
+				$fp = @fopen("../data/".$hash.".html", "w+");
 				fwrite($fp, $output);
 				fclose($fp);
 			}
@@ -72,8 +73,8 @@ switch ($_POST['type']){
 		$image = file_get_contents($_POST['image']);
 		if(!empty($image)){
 			$hash=md5($image);
-			if(file_exists("data/".$hash.".html")){
-				echo file_get_contents("data/".$hash.".html");
+			if(file_exists("../data/".$hash.".html")){
+				echo file_get_contents("../data/".$hash.".html");
 			}else{
 				$client = new AipImageClassify($APP_ID, $API_KEY, $SECRET_KEY);
 				if($_POST['choice']=="plant"){
@@ -97,7 +98,7 @@ switch ($_POST['type']){
 				}
 				echo '<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>不准确？更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
 				$output=$output.'<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>不准确？更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
-				$fp = @fopen("data/".$hash.".html", "w+");
+				$fp = @fopen("../data/".$hash.".html", "w+");
 				fwrite($fp, $output);
 				fclose($fp);
 			}

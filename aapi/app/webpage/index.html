@@ -2,10 +2,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>普思创识 - 凤鸣高级中学</title>
-    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+  <title>你走错地方了</title>
+    <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
     <link rel="icon" href="https://i.loli.net/2020/09/26/1qFYLIAkUzrPEgt.png" type="image/png">
     <link rel="shortcut icon" href='https://i.loli.net/2020/09/26/1qFYLIAkUzrPEgt.png' type="image/png">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <script>
       function online(){
         document.getElementById("control").innerHTML = '<h5>选择图片存在的地方：</h5><input type="radio" name="type" value="online" onClick="online()" checked/><strong>在线图片</strong><input type="radio" name="type" value="upload" onClick="upload()"/><strong>上传图片</strong><input type="text" name="image"/><br/>';
@@ -19,12 +20,6 @@
   <div class="main">  
   <form id="mainform" action="entrance.php" method="post" enctype="multipart/form-data">
     <h3>普思创识</h3>
-    <noscript>
-      <h4>您的浏览器不支持Javascript，所以不能进行识别！</h4>
-      <h4>欢迎下载手机APP，识别更加便利！</h4>
-      <img src="https://i.loli.net/2021/03/28/Je3PgbtXcv8Unfx.png" width=100%/>
-      <!--
-    </noscript>
     <h4>只需要一点信息，马上开始...</h4>
     <fieldset id="control">
       <h5>选择图片存在的地方：</h5>
@@ -42,9 +37,6 @@
     <fieldset>
       <button name="submit" type="submit" id="form-submit">开始！</button>
     </fieldset>
-    <h4>欢迎下载手机APP，识别更加便利！</h4>
-    <img src="https://i.loli.net/2021/03/28/Je3PgbtXcv8Unfx.png" width=100%/>
-    <noscript>--></noscript>
   </form>
 </div>
 </body>

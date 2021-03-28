@@ -96,8 +96,8 @@ switch ($_POST['type']){
 					$before_score=$line['score'];
 					$before_name=$line['name'];
 				}
-				echo '<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>不准确？更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
-				$output=$output.'<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>不准确？更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
+				echo '<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
+				$output=$output.'<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
 				$fp = @fopen("../data/".$_POST['choice'].'/'.$hash.".html", "w+");
 				fwrite($fp, $output);
 				fclose($fp);

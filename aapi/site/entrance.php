@@ -59,7 +59,7 @@ switch ($_POST['type']){
 				}
 				echo '<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
 				$output=$output.'<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
-				$fp = @fopen("data/".$hash.".html", "w+");
+				$fp = @fopen("data/".$_POST['choice'].'/'.$hash.".html", "w+");
 				fwrite($fp, $output);
 				fclose($fp);
 			}
@@ -97,7 +97,7 @@ switch ($_POST['type']){
 				}
 				echo '<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>不准确？更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
 				$output=$output.'<h4>我认为它应该是：</h4>'.'<h5>'.$last_score.'->'.$last_name.'</h5>'.'<h4>不准确？更多信息：</h4>'.'<h5>MD5:'.$hash.'</h5>';
-				$fp = @fopen("data/".$hash.".html", "w+");
+				$fp = @fopen("data/".$_POST['choice'].'/'.$hash.".html", "w+");
 				fwrite($fp, $output);
 				fclose($fp);
 			}
@@ -109,6 +109,7 @@ switch ($_POST['type']){
 		echo '<h4>我没理解您的请求，劳烦您再确认一下呢！</h4>';
 }
 ?>
+			<h4>版权所有 &copy; <a href="https://www.xiaxinzhe.cn">夏歆哲</a> <a href="https://www.ghink.net">极科网络工作室</a></h4>
         </form>
     </div>
 </body>

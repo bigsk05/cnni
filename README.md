@@ -1,4 +1,2 @@
-# Animal and Plant Identification
-
-#### Introduction
-Animal and Plant Identification Program From Ghink Network Studio and Techy Group of Fengming High School
+# 动植物识别（普思创识）/卷积神经网络探索
+## 项目仍在进行中

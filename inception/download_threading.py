@@ -28,6 +28,7 @@ for i in range(0,threadNum):
             begin = (i - 1) * numsEach
             end = (i * numsEach) - 1
             fb.write(fallList[begin:end])
+#下载文件
 for i in range(0,threadNum):
     with open("tmp/"+str(i),"r") as fb:
         for line in fb:

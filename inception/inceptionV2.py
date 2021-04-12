@@ -1,9 +1,9 @@
-import tensorflow as tf
+​import tensorflow as tf
 import numpy as np
 
 #定义变量函数初始化函数
 def define_variable(shape,name):
-    return tf.Variable(tf.truncated_normal(shape,stddev=0.1),name)
+    return tf.Variable(tf.truncated_normal(shape, stddev=0.1), name)
 
 #最大下采样操作
 def max_pool(name, l_input, k1, k2):
@@ -16,11 +16,19 @@ def inception_model(input, filters_1x1, filters_3x3_reduce, filters_3x3, filters
     p3f11 = filters_5x5_reduce
     p3f55 = filters_5x5
     p4f11 = filters_pool_proj
+
     path1 = tf.layers.conv2d(input, p1f11, 1, padding='same', activation=tf.nn.relu)
-    path2 = tf.layers.conv2d(input, p2f11, 1, activation=tf.nn.relu)
-    path2 = tf.layers.conv2d(path2, p2f33, 3, padding='same', activation=tf.nn.relu)
+
+    path2 = tf.layers.conv2d(input, p2f11, [1, 1], activation=tf.nn.relu)
+    path2 = tf.layers.conv2d(path2, p2f33, [1, 3], padding='same', activation=tf.nn.relu)
+    path2 = tf.layers.conv2d(path2, p2f33, [3, 1], padding='same', activation=tf.nn.relu)
+
     path3 = tf.layers.conv2d(input, p3f11, 1, activation=tf.nn.relu)
-    path3 = tf.layers.conv2d(path3, p3f55, 5, padding='same', activation=tf.nn.relu)
+    path3 = tf.layers.conv2d(path3, p3f55, [1, 3], padding='same', activation=tf.nn.relu)
+    path3 = tf.layers.conv2d(path3, p3f55, [3, 1], padding='same', activation=tf.nn.relu)
+    path3 = tf.layers.conv2d(path3, p3f55, [1, 3], padding='same', activation=tf.nn.relu)
+    path3 = tf.layers.conv2d(path3, p3f55, [3, 1], padding='same', activation=tf.nn.relu)
+
     path4 = tf.layers.max_pooling2d(input, pool_size=3, strides=1, padding='same')
     path4 = tf.layers.conv2d(path4, p4f11, 1, activation=tf.nn.relu)
     out = tf.concat((path1, path2, path3, path4), axis=-1)

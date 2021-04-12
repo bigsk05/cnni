@@ -7,12 +7,12 @@ def define_variable(shape,name):
     return tf.Variable(tf.truncated_normal(shape,stddev=0.1),name)
 
 
-# 最大下采样操作
+#最大下采样操作
 def max_pool(name, l_input, k1, k2):
     return tf.nn.max_pool(l_input, ksize=[1, k1, k1, 1], strides=[1, k2, k2, 1], padding='SAME', name=name)
 
 
-# network structure
+#network structure
 def inception_model(input, filters_1x1, filters_3x3_reduce, filters_3x3, filters_5x5_reduce, filters_5x5, filters_pool_proj):
     p1f11 = filters_1x1
     p2f11 = filters_3x3_reduce
@@ -32,9 +32,9 @@ def inception_model(input, filters_1x1, filters_3x3_reduce, filters_3x3, filters
     return out
 
 
-# 网络结构定义
-# 输入参数：images，image batch、4D tensor、tf.float32、[batch_size, width, height, channels]
-# 返回参数：logits, float、 [batch_size, n_classes]
+#网络结构定义
+#输入参数：images，image batch、4D tensor、tf.float32、[batch_size, width, height, channels]
+#返回参数：logits, float、 [batch_size, n_classes]
 def inference(images,batch_size,  n_classes):
     W_conv1 = define_variable([3, 3, 3, 192], name="W")
     b_conv1 = define_variable([192], name="B")
@@ -67,7 +67,7 @@ def inference(images,batch_size,  n_classes):
     inception_5b = inception_model(input=inception_5a, filters_1x1=384, filters_3x3_reduce=192, filters_3x3=384,
                                    filters_5x5_reduce=48, filters_5x5=128, filters_pool_proj=128)
 
-    net = tf.layers.average_pooling2d(inception_5b, 7, 1, name="avgpool")  # -> [batch, 1, 1, 768]
+    net = tf.layers.average_pooling2d(inception_5b, 7, 1, name="avgpool")  #-> [batch, 1, 1, 768]
 
     reshape = tf.reshape(net, shape=[batch_size, -1])
     dim = reshape.get_shape()[1].value
@@ -81,10 +81,10 @@ def inference(images,batch_size,  n_classes):
 
     return logits
 
-# -----------------------------------------------------------------------------
-# loss计算
-# 传入参数：logits，网络计算输出值。labels，真实值，在这里是0或者1
-# 返回参数：loss，损失值
+#-----------------------------------------------------------------------------
+#loss计算
+#传入参数：logits，网络计算输出值。labels，真实值，在这里是0或者1
+#返回参数：loss，损失值
 def losses(logits, labels):
     with tf.variable_scope('loss') as scope:
         cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=labels,
@@ -94,10 +94,10 @@ def losses(logits, labels):
     return loss
 
 
-# --------------------------------------------------------------------------
-# loss损失值优化
-# 输入参数：loss。learning_rate，学习速率。
-# 返回参数：train_op，训练op，这个参数要输入sess.run中让模型去训练。
+#--------------------------------------------------------------------------
+#loss损失值优化
+#输入参数：loss。learning_rate，学习速率。
+#返回参数：train_op，训练op，这个参数要输入sess.run中让模型去训练。
 def trainning(loss, learning_rate):
     with tf.name_scope('optimizer'):
         optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
@@ -107,10 +107,10 @@ def trainning(loss, learning_rate):
 
 
 
-# -----------------------------------------------------------------------
-# 评价/准确率计算
-# 输入参数：logits，网络计算值。labels，标签，也就是真实值，在这里是0或者1。
-# 返回参数：accuracy，当前step的平均准确率，也就是在这些batch中多少张图片被正确分类了。
+#-----------------------------------------------------------------------
+#评价/准确率计算
+#输入参数：logits，网络计算值。labels，标签，也就是真实值，在这里是0或者1。
+#返回参数：accuracy，当前step的平均准确率，也就是在这些batch中多少张图片被正确分类了。
 def evaluation(logits, labels):
     with tf.variable_scope('accuracy') as scope:
         correct = tf.nn.in_top_k(logits, labels, 1)

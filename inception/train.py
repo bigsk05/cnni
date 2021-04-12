@@ -2,6 +2,7 @@ import os
 import numpy as np
 import tensorflow as tf
 import input_data
+#此处引入模型，可以根据需要修改
 import inceptionV1
 
 #变量声明

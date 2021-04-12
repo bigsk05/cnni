@@ -5,33 +5,33 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 #声明用于保存数据的全局变量，如果要自动适应数据集的话，可以修改成字典自动存取
-roses=[]
-label_roses=[]
-tulips=[]
-label_tulips=[]
-dandelion=[]
-label_dandelion=[]
-sunflowers=[]
-label_sunflowers=[]
+n01443537=[]
+label_n01443537=[]
+n01484850=[]
+label_n01484850=[]
+n01514859=[]
+label_n01514859=[]
+n01608432=[]
+label_n01608432=[]
 
 def get_files(file_dir, ratio):
     #同样的，此处可以修改成利用for循环遍历字典来实现自适应
-    for file in os.listdir(file_dir + '/roses'):
-        roses.append(file_dir + '/roses' + '/' + file)
-        label_roses.append(0)
-    for file in os.listdir(file_dir + '/tulips'):
-        tulips.append(file_dir + '/tulips' + '/' + file)
-        label_tulips.append(1)
-    for file in os.listdir(file_dir + '/dandelion'):
-        dandelion.append(file_dir + '/dandelion' + '/' + file)
-        label_dandelion.append(2)
-    for file in os.listdir(file_dir + '/sunflowers'):
-        sunflowers.append(file_dir + '/sunflowers' + '/' + file)
-        label_sunflowers.append(3)
+    for file in os.listdir(file_dir + '/n01443537'):
+        n01443537.append(file_dir + '/n01443537' + '/' + file)
+        label_n01443537.append(0)
+    for file in os.listdir(file_dir + '/n01484850'):
+        n01484850.append(file_dir + '/n01484850' + '/' + file)
+        label_n01484850.append(1)
+    for file in os.listdir(file_dir + '/n01514859'):
+        n01514859.append(file_dir + '/n01514859' + '/' + file)
+        label_n01514859.append(2)
+    for file in os.listdir(file_dir + '/n01608432'):
+        n01608432.append(file_dir + '/n01608432' + '/' + file)
+        label_n01608432.append(3)
 
     #对生成的图片路径和标签List做打乱处理
-    image_list = np.hstack((roses, tulips, dandelion, sunflowers))
-    label_list = np.hstack((label_roses, label_tulips, label_dandelion, label_sunflowers))
+    image_list = np.hstack((n01443537, n01484850, n01514859, n01608432))
+    label_list = np.hstack((label_n01443537, label_n01484850, label_n01514859, label_n01608432))
 
     #利用shuffle打乱顺序
     temp = np.array([image_list, label_list])

@@ -3,7 +3,7 @@ import numpy as np
 import tensorflow as tf
 import input_data
 #此处引入模型，可以根据需要修改
-import inceptionV1
+import inceptionV1 as inception
 
 #变量声明
 N_CLASSES=4#种类数量
@@ -21,14 +21,14 @@ train, train_label, val, val_label=input_data.get_files(train_dir, 0.3)
 train_batch, train_label_batch=input_data.get_batch(train, train_label, IMG_W, IMG_H, BATCH_SIZE, CAPACITY)
 val_batch, val_label_batch=input_data.get_batch(val, val_label, IMG_W, IMG_H, BATCH_SIZE, CAPACITY)
 
-train_logits=inceptionV1.inference(train_batch, BATCH_SIZE, N_CLASSES)
-train_loss=inceptionV1.losses(train_logits, train_label_batch)
-train_op=inceptionV1.trainning(train_loss, learning_rate)
-train_acc=inceptionV1.evaluation(train_logits, train_label_batch)
+train_logits=inception.inference(train_batch, BATCH_SIZE, N_CLASSES)
+train_loss=inception.losses(train_logits, train_label_batch)
+train_op=inception.trainning(train_loss, learning_rate)
+train_acc=inception.evaluation(train_logits, train_label_batch)
 
-test_logits=inceptionV1.inference(val_batch, BATCH_SIZE, N_CLASSES)
-test_loss=inceptionV1.losses(test_logits, val_label_batch)
-test_acc=inceptionV1.evaluation(test_logits, val_label_batch)
+test_logits=inception.inference(val_batch, BATCH_SIZE, N_CLASSES)
+test_loss=inception.losses(test_logits, val_label_batch)
+test_acc=inception.evaluation(test_logits, val_label_batch)
 
 summary_op=tf.summary.merge_all()
 

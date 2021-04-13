@@ -1,9 +1,9 @@
-​
 from PIL import Image
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
-import inceptionV1
+#此处同理，按照需求更改引入模块
+import inceptionV1 as inception
 from input_data import get_files
 
 # 获取一张图片
@@ -31,14 +31,14 @@ def evaluate_one_image(image_array):
         image = tf.image.per_image_standardization(image)
         image = tf.reshape(image, [1, 64, 64, 3])
 
-        logit = inceptionV1.inference(image, BATCH_SIZE, N_CLASSES)
+        logit = inception.inference(image, BATCH_SIZE, N_CLASSES)
 
         logit = tf.nn.softmax(logit)
 
         x = tf.placeholder(tf.float32, shape=[64, 64, 3])
 
         # you need to change the directories to yours.
-        logs_train_dir = 'D:/tensorflow/practicePlus/googLeNet/save/'
+        logs_train_dir = 'save/'
 
         saver = tf.train.Saver()
 
@@ -55,23 +55,20 @@ def evaluate_one_image(image_array):
 
             prediction = sess.run(logit, feed_dict={x: image_array})
             max_index = np.argmax(prediction)
-            if max_index == 0:
-                result = ('这是玫瑰花的可能性为： %.6f' % prediction[:, 0])
-            elif max_index == 1:
-                result = ('这是郁金香的可能性为： %.6f' % prediction[:, 1])
-            elif max_index == 2:
-                result = ('这是蒲公英的可能性为： %.6f' % prediction[:, 2])
-            else:
-                result = ('这是这是向日葵的可能性为： %.6f' % prediction[:, 3])
-            return result
+            print('这是种类1的可能性为： %.6f' % prediction[:, 0])
+            print('这是种类2的可能性为： %.6f' % prediction[:, 1])
+            print('这是种类3的可能性为： %.6f' % prediction[:, 2])
+            print('这是种类4的可能性为： %.6f' % prediction[:, 3])
+            return max_index
 
 
 # ------------------------------------------------------------------------
 
 if __name__ == '__main__':
-    img = Image.open('D:/tensorflow/practicePlus/googLeNet/dataset/input_data/roses/640samples0.jpg')
-    plt.imshow(img)
-    plt.show()
+    img = Image.open('test/n01608432_78.JPEG')#测试图像的路径
+    #此处显示测试图像，可以删去
+    #plt.imshow(img)
+    #plt.show()
     imag = img.resize([64, 64])
     image = np.array(imag)
     evaluate_one_image(image)

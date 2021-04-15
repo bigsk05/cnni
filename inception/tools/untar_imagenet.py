@@ -9,7 +9,7 @@ def untar(fname, dirs):
     tar.extractall(path = dirs) 
 
 if __name__ == '__main__':
-    os.makedirs("tmp",exist_ok=True)
+    os.makedirs("untar",exist_ok=True)
     with open(label,"r") as fb:
         for line in fb:
             fall=line.split(" ",1)
